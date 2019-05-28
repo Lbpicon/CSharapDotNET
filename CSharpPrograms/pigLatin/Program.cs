@@ -10,6 +10,7 @@ namespace pigLatin
     {
         static void Main(string[] args)
         {
+             //Asking for translation
             Console.WriteLine("Enter a word for pig latin translation");
             string input = Console.ReadLine();
             pigLatin(input);
@@ -19,7 +20,7 @@ namespace pigLatin
 
         public static string pigLatin(string input)
         {
-            char[] chars = { 'a', 'e', 'i', 'o', 'u', 'A','E','I','O','U' };
+            char[] chars = { 'a', 'e', 'i', 'o', 'u', 'A','E','I','O','U' }; //vowels upper case and lowercase
             int firstVowel = input.IndexOfAny(chars);
             if (firstVowel == -1)
 
@@ -29,10 +30,10 @@ namespace pigLatin
                 return input.Substring(yAsAVowel) + input.Substring(0, yAsAVowel) + "ay";
             }
 
-            else if (firstVowel == 0)
-            {
+            else if (firstVowel == 0) // equal == comparison
+            {   
                 bool lastLetterVowel = input.EndsWith("a") || input.EndsWith("e") || input.EndsWith("i") || input.EndsWith("o") || input.EndsWith("u");
-                if (lastLetterVowel == true)
+                if (lastLetterVowel == true) //if boolean conditions are true
                 {
                     return input.Substring(firstVowel) + input.Substring(0, firstVowel) + "yay";
                 }
