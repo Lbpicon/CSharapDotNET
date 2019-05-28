@@ -10,27 +10,53 @@ namespace pigLatin
     {
         static void Main(string[] args)
         {
-            
-            Console.WriteLine(MakePigLatin(str));
+            Console.WriteLine("Enter a word for pig latin translation");
             string input = Console.ReadLine();
-            // Translate the word to Pig Latin
-            string convertedWord = ToPigLatin(input);
-            Console.WriteLine(convertedWord);
+            pigLatin(input);
+            Console.ReadLine();
+          
         }
 
-        public static void ToPigLatin (string word)
+        public static string pigLatin(string input)
         {
-            char[] vowels = { 'a', 'e', 'i', 'o', 'u' };
-            bool startWithVowel = false;
-            bool endWithVowel = false;
-            bool foundVowel = false;
+            char[] chars = { 'a', 'e', 'i', 'o', 'u', 'A','E','I','O','U' };
+            int firstVowel = input.IndexOfAny(chars);
+            if (firstVowel == -1)
 
-            for (int i = 0; i < vowels.Length - 1; i++)
             {
-                string currentVowel = vowels[i].ToString();
-
+                char[] charsy = { 'y', 'Y' };
+                int yAsAVowel = input.IndexOfAny(charsy);
+                return input.Substring(yAsAVowel) + input.Substring(0, yAsAVowel) + "ay";
             }
-        }
-        
-    }
+
+            else if (firstVowel == 0)
+            {
+                bool lastLetterVowel = input.EndsWith("a") || input.EndsWith("e") || input.EndsWith("i") || input.EndsWith("o") || input.EndsWith("u");
+                if (lastLetterVowel == true)
+                {
+                    return input.Substring(firstVowel) + input.Substring(0, firstVowel) + "yay";
+                }
+
+                else
+                {
+                    return input.Substring(firstVowel) + input.Substring(0, firstVowel) + "ay";
+                }
+            }
+
+            else
+            {
+                return input.Substring(firstVowel) + input.Substring(0, firstVowel) + "yay";
+            }
+            
+            }
+
+            
+                                     }
+
 }
+    
+
+
+  /*for (int i = 0; i<vowels.Length - 1; i++)
+            {
+                string currentVowel = vowels[i].ToString();*/
