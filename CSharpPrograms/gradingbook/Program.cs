@@ -8,39 +8,72 @@ namespace gradingbook
 {
     class Program
     {
-
+        static string name;
         static void Main(string[] args)
         {
-            string quit = "quit";
-
-            Console.WriteLine("This is your gradebook. Enter student's name or 'quit' to finish");
-            string name = Console.ReadLine();
-            List<int> grades = new List<int>();
-
+            
             //BUILD DICTIONARY
-            var dictionary = new Dictionary<string, List<int>>();
-            dictionary.Add(name, grades);
-                                            
+            Dictionary<string, string> Gradebook = new Dictionary<string, string>();
 
-            while (name.ToLower() != "quit")
+            while (name != "quit")
             {
-                //ASK FOR STUDENT'S GRADE
-                Console.WriteLine("Enter {0}'s grades, separated by a blank space only.", name);
-                var grades = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine(grades);
+
+                string quit = "quit";
+
+                Console.WriteLine("This is your gradebook. Enter student's name or 'quit' to finish");
+                string grades = " ";
+                name = Console.ReadLine();
+
+                if (name.ToLower() == quit)
+
+                {
+                    break; // Stop gathering names/array  - SKIPS TO FOR EACH 
+                }
+                                                           
+                 //ASK FOR STUDENT'S GRADE
+                Console.WriteLine("Enter {0}'s grades, separated by a blank space only. Or type 'quit' to stop.", name);
+                grades = Console.ReadLine();
+                // adding to dictionary
+                Gradebook.Add(name, grades);
+                Console.Clear(); //clears board
+                                              
+
+                }
+
+                Console.Clear();
+
+            foreach (var name in Gradebook.Keys) //creating calculation for each student 
+            {
+                // Split Strings
+                string[] gradesSplit = Gradebook[name].Split(' '); // Splits at spaces in b/w numbers
+                //convert to numbers
+                int[] grades2nums = Array.ConvertAll(gradesSplit, int.Parse); // make into INTegers
+                //find highest grade
+                int highestGrade = grades2nums.Max();
+                //lowest grade
+                int lowestGrade = grades2nums.Min();
+                //average grade
+                double avgGrade = grades2nums.Average();
+                // all of calculations for student
+                Console.WriteLine("Student: " + name);
+                Console.WriteLine("Highest Grade: " + highestGrade);
+                Console.WriteLine("Lowest Grade: " + lowestGrade);
+                Console.WriteLine("Avg Grade: " + avgGrade);
+                Console.WriteLine("------");
+
+
+
+            }
+
+            Console.Read();
 
             }
                                                     
-             else (name.ToLower() == "quit")
-            {
-                
-
-
-            }
+          
         }
     }
     
-}
+
 
 
 
